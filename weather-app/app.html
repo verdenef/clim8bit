@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Checker Pro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a href="index.html" class="btn back-btn">Back</a>
+      <h1 class="logo">Weather Checker Pro</h1>
+      <button id="dark-mode-toggle" class="btn">🌙</button>
+    </div>
+    <p class="tagline">Check the weather in any city, instantly.</p>
+  </header>
+
+  <main>
+    <div class="app-grid">
+      <!-- Input -->
+      <section class="input-section">
+        <label for="city-input" class="input-label">City Name</label>
+        <input type="text" id="city-input" placeholder="Enter city..." />
+        <button id="search-btn" class="btn-primary">Search</button>
+      </section>
+
+      <!-- Result -->
+      <section class="result-section">
+        <div id="error-message" class="error-message" style="display:none;"></div>
+        <div id="weather-info">
+          <h2 id="city-name">City</h2>
+          <div id="weather-icon">
+            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather Icon" />
+          </div>
+          <p id="description">Weather</p>
+          <p id="temperature">0°C</p>
+          <div class="weather-details">
+            <span id="humidity">Humidity: 0%</span>
+            <span id="wind">Wind: 0 m/s</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Team Meteor. All rights reserved.</p>
+  </footer>
+
+  <script src="api.js"></script>
+  <script src="dom.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
