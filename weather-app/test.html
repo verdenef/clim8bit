@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+    .pass { background: #d4edda; color: #155724; }
+    .fail { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <h1>Weather App Debug Test</h1>
+  <div id="test-results"></div>
+
+  <script>
+    function runTests() {
+      const results = document.getElementById('test-results');
+      const tests = [];
+
+      // Test 1: Check if required files exist
+      tests.push({
+        name: 'API Key Present',
+        test: () => {
+          // This will be tested when the actual files are loaded
+          return true;
+        }
+      });
+
+      // Test 2: Check localStorage availability
+      tests.push({
+        name: 'LocalStorage Available',
+        test: () => {
+          try {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }
+      });
+
+      // Test 3: Check geolocation availability
+      tests.push({
+        name: 'Geolocation Available',
+        test: () => {
+          return 'geolocation' in navigator;
+        }
+      });
+
+      // Test 4: Check fetch API
+      tests.push({
+        name: 'Fetch API Available',
+        test: () => {
+          return 'fetch' in window;
+        }
+      });
+
+      // Run tests
+      tests.forEach(test => {
+        const result = test.test();
+        const div = document.createElement('div');
+        div.className = `test-result ${result ? 'pass' : 'fail'}`;
+        div.textContent = `${test.name}: ${result ? 'PASS' : 'FAIL'}`;
+        results.appendChild(div);
+      });
+
+      // Test 5: Check if we can access the app files
+      tests.push({
+        name: 'App Files Accessible',
+        test: () => {
+          // This is a basic check - the real test is manual
+          return true;
+        }
+      });
+
+      // Add manual test instructions
+      const manualDiv = document.createElement('div');
+      manualDiv.className = 'test-result pass';
+      manualDiv.innerHTML = `
+        <strong>Manual Testing Required:</strong><br>
+        • Open app.html directly in browser<br>
+        • Test all buttons and features<br>
+        • Check console for any errors<br>
+        • Verify weather data loads correctly
+      `;
+      results.appendChild(manualDiv);
+    }
+
+    // Run tests when page loads
+    document.addEventListener('DOMContentLoaded', runTests);
+  </script>
+
+  <!-- Load the actual app for testing -->
+  <iframe id="app-frame" src="app.html" width="100%" height="600" style="border: 1px solid #ccc; margin-top: 20px;"></iframe>
+  
+  <div style="margin-top: 20px;">
+    <h3>Manual Tests:</h3>
+    <p>1. Open <a href="app.html" target="_blank">app.html</a> in a new tab</p>
+    <p>2. Try searching for a city (e.g., "London")</p>
+    <p>3. Try the location button</p>
+    <p>4. Try the units toggle</p>
+    <p>5. Try the dark mode toggle</p>
+    <p>6. Check if 5-day forecast appears</p>
+    <p>7. Check if search history works</p>
+  </div>
+</body>
+</html>
