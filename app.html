@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clim8bit Weather Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a href="index.html" class="btn back-btn">🌲 BACK</a>
+      <div>
+        <h1 class="logo">CLIM8BIT</h1>
+        <p class="tagline">Check the weather in any city with retro pixel style!</p>
+      </div>
+      <button id="dark-mode-toggle" class="btn theme-toggle">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="app-grid">
+      <!-- Input -->
+      <section class="input-section">
+        <label for="city-input" class="input-label">🌍 CITY NAME</label>
+        <div class="input-row">
+          <input type="text" id="city-input" placeholder="Enter city..." />
+          <button id="search-btn" class="btn-primary">🔍 SEARCH</button>
+          <button id="location-btn" class="btn-secondary">📍 LOCATION</button>
+        </div>
+        
+        <!-- Units Toggle -->
+        <div class="units-toggle">
+          <button id="units-btn" class="btn-units">°C</button>
+        </div>
+        
+        <!-- Search History -->
+        <div id="search-history" class="search-history" style="display:none;"></div>
+      </section>
+
+      <!-- Weather Alerts -->
+      <section id="weather-alerts" class="alerts-section" style="display:none;"></section>
+
+      <!-- Result -->
+      <section class="result-section">
+        <div id="error-message" class="error-message" style="display:none;"></div>
+        <div id="weather-info">
+          <h2 id="city-name">City</h2>
+          <div id="weather-icon">
+            <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather Icon" />
+          </div>
+          <p id="description">Weather</p>
+          <p id="temperature">0°C</p>
+          <div class="weather-details">
+            <span id="humidity">Humidity: 0%</span>
+            <span id="wind">Wind: 0 m/s</span>
+            <span id="feels-like">Feels like: 0°C</span>
+            <span id="pressure">Pressure: 0 hPa</span>
+            <span id="visibility">Visibility: 0 km</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forecast -->
+      <section id="forecast-container" class="forecast-section" style="display:none;"></section>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading-overlay" style="display:none;">
+      <div class="pixel-loader">
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+      </div>
+      <p>Loading weather data...</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Team Meteor. All rights reserved.</p>
+    <div style="margin-top: 10px; font-size: 1.2rem;">🌿 ⚡ 🌿</div>
+  </footer>
+
+  <script src="api.js"></script>
+  <script src="dom.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
