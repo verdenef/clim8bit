@@ -18,8 +18,6 @@ html, body {
 html { font-size: 18px; }
 @media (max-width: 600px) { html { font-size: 17px; } }
 
-/* Pixel Background Elements - Removed falling grid effect */
-
 /* Floating pixel animation - particles move from bottom to top */
 @keyframes pixelFloat {
   0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
