@@ -18,26 +18,14 @@ html, body {
 html { font-size: 18px; }
 @media (max-width: 600px) { html { font-size: 17px; } }
 
-/* Pixel Background Elements */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(90deg, transparent 0%, rgba(46, 46, 46, 0.1) 50%, transparent 100%),
-    linear-gradient(0deg, transparent 0%, rgba(46, 46, 46, 0.1) 50%, transparent 100%);
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: -1;
-  animation: pixel-scan 10s linear infinite;
-}
+/* Pixel Background Elements - Removed falling grid effect */
 
-@keyframes pixel-scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+/* Floating pixel animation - particles move from bottom to top */
+@keyframes pixelFloat {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
 }
 
 a { text-decoration: none; color: inherit; }
@@ -51,7 +39,7 @@ img { max-width: 100%; border-radius: 0; display: block; }
   font-size: 1rem;
   font-family: 'Press Start 2P', cursive;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 3px solid #2E2E2E;
   text-shadow: 1px 1px 0px #2E2E2E;
   box-shadow: 4px 4px 0px #2E2E2E;
@@ -63,8 +51,8 @@ img { max-width: 100%; border-radius: 0; display: block; }
 }
 .btn:hover { 
   background: #FFAAA5; 
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 .btn-primary { 
   background: #4682B4; 
@@ -72,8 +60,8 @@ img { max-width: 100%; border-radius: 0; display: block; }
 }
 .btn-primary:hover { 
   background: #556B2F; 
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 .back-btn { 
   font-size: 0.8rem; 
@@ -174,6 +162,7 @@ img { max-width: 100%; border-radius: 0; display: block; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
   min-height: 160px;
   text-align: center;
   width: 100%;
@@ -319,13 +308,14 @@ body.dark .feature-card:hover {
   border-radius: 0;
   box-shadow: 4px 4px 0px #2E2E2E;
   border: 3px solid #2E2E2E;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   max-width: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  z-index: 1;
 }
 
 .member-card::before {
@@ -335,7 +325,7 @@ body.dark .feature-card:hover {
   left: -3px;
   right: -3px;
   bottom: -3px;
-  background: linear-gradient(45deg, #FFD3B6, #FFAAA5);
+  background: linear-gradient(45deg, #A8E6CF, #FFD3B6);
   z-index: -1;
   border-radius: 0;
 }
@@ -346,18 +336,30 @@ body.dark .feature-card:hover {
   height: 180px;
   object-fit: cover;
   border-radius: 0;
-  border: 4px solid #2E2E2E;
+  border: none;
   margin-bottom: 1rem;
   display: block;
-  box-shadow: 3px 3px 0px #556B2F;
-  transition: transform 0.3s ease;
+  box-shadow: 3px 3px 0px #2E2E2E;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .member-photo:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 
 /* Pixel Name + Role stacked */
+.name-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
 .member-card h3 {
   font-weight: 600;
   font-size: 1.2rem;
@@ -366,6 +368,8 @@ body.dark .feature-card:hover {
   font-family: 'Press Start 2P', cursive;
   color: #2E2E2E;
   text-shadow: 1px 1px 0px #A8E6CF;
+  position: relative;
+  z-index: 2;
 }
 .member-card .role {
   font-style: italic;
@@ -373,6 +377,8 @@ body.dark .feature-card:hover {
   font-size: 1.1rem;
   text-align: center;
   font-weight: bold;
+  position: relative;
+  z-index: 2;
 }
 
 /* Pixel App Page */
@@ -402,15 +408,15 @@ body.dark .feature-card:hover {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.7rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-shadow: 1px 1px 0px #2E2E2E;
   box-shadow: 4px 4px 0px #2E2E2E;
 }
 
 .btn-secondary:hover {
   background: #4682B4;
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 
 /* Units Toggle */
@@ -428,15 +434,15 @@ body.dark .feature-card:hover {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-shadow: 1px 1px 0px #A8E6CF;
   box-shadow: 3px 3px 0px #2E2E2E;
 }
 
 .btn-units:hover {
   background: #FFAAA5;
-  transform: translateY(-1px);
-  box-shadow: 4px 4px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 
 /* Search History */
@@ -470,14 +476,14 @@ body.dark .feature-card:hover {
   border: 2px solid #2E2E2E;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-weight: bold;
 }
 
 .history-item:hover {
   background: #FFD3B6;
-  transform: translateY(-1px);
-  box-shadow: 2px 2px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 0px #2E2E2E;
 }
 
 .input-label {
@@ -513,6 +519,7 @@ body.dark .feature-card:hover {
   border: 3px solid #2E2E2E;
   text-align: center;
   position: relative;
+  z-index: 1;
 }
 
 .result-section::before {
@@ -613,6 +620,7 @@ body.dark .site-header {
   border-color: #A8E6CF;
 }
 body.dark .features { background: #1a1a1a; }
+body.dark .team { background: #1a1a1a !important; }
 body.dark .feature-card,
 body.dark .member-card,
 body.dark .result-section { 
@@ -630,6 +638,8 @@ body.dark .btn {
 body.dark .btn:hover { 
   background: #556B2F; 
   border-color: #FFD3B6;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
 }
 body.dark .intro h2 { color: #A8E6CF; }
 body.dark .intro p { color: #FFD3B6; }
@@ -637,6 +647,18 @@ body.dark .features-container h2 { color: #A8E6CF; }
 body.dark .team h2 { color: #A8E6CF; }
 body.dark .member-card h3 { color: #A8E6CF; }
 body.dark .member-card .role { color: #FFD3B6; }
+body.dark .name-row { color: #A8E6CF; }
+
+/* Dark mode member card pseudo-element */
+body.dark .member-card::before {
+  background: linear-gradient(45deg, #2E2E2E, #1a1a1a);
+}
+
+/* Dark mode team photo hover effects */
+body.dark .member-photo:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
+}
 
 /* Dark mode result section */
 body.dark .result-section::before {
@@ -701,6 +723,8 @@ body.dark .theme-toggle {
 body.dark .theme-toggle:hover {
   background: #556B2F;
   border-color: #FFD3B6;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
 }
 
 /* Weather Alerts Section */
@@ -712,6 +736,7 @@ body.dark .theme-toggle:hover {
   box-shadow: 6px 6px 0px #2E2E2E;
   position: relative;
   animation: alertPulse 2s ease-in-out infinite;
+  z-index: 1;
 }
 
 .alerts-section::before {
@@ -792,6 +817,7 @@ body.dark .theme-toggle:hover {
   padding: 2rem;
   box-shadow: 6px 6px 0px #2E2E2E;
   position: relative;
+  z-index: 1;
 }
 
 .forecast-section::before {
@@ -828,12 +854,12 @@ body.dark .theme-toggle:hover {
   padding: 1rem;
   text-align: center;
   box-shadow: 3px 3px 0px #2E2E2E;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .forecast-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 4px 4px 0px #2E2E2E;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #2E2E2E;
 }
 
 .forecast-day {
@@ -924,6 +950,32 @@ body.dark .history-item {
 
 body.dark .history-item:hover {
   background: #556B2F;
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 0px #A8E6CF;
+}
+
+/* Dark mode hover effects for all buttons */
+body.dark .btn-primary:hover {
+  background: #556B2F;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
+}
+
+body.dark .btn-secondary:hover {
+  background: #4682B4;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
+}
+
+body.dark .btn-units:hover {
+  background: #FFAAA5;
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
+}
+
+body.dark .forecast-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px #A8E6CF;
 }
 
 body.dark .forecast-section {
